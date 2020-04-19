@@ -4,31 +4,21 @@ import { v4 as uuidv4 } from 'uuid';
 import { ROOM } from '../constants/routes';
 import HeroPanel from '../components/HeroPanel';
 
-const Home = () => {
+export default function Home() {
   const history = useHistory();
   const [name, setName] = useState('');
+  const [roomId, setRoom] = useState('');
+  const changeName = useCallback((evt) => setName(evt.target.value), [setName]);
+  const changeRoom = useCallback((evt) => setRoom(evt.target.value), [setRoom]);
   const createRoom = useCallback(
     () => {
       history.push(`${ROOM}/${uuidv4()}`, { create: true });
     },
     [history],
   );
+  const joinRoom = useCallback(() => {  history.push(`${ROOM}/${roomId}`)}, [history, roomId]);
 
   return (
-    <>
-    <HeroPanel />
-      <div>
-        <h2>Create Room</h2>
-        <button type="button" onClick={createRoom}>Create</button>
-      </div>
-      <div>
-        <h2>Join Room</h2>
-        <label htmlFor="name">Name</label>
-        <input name="name" placeholder="Insert a name" value={name} onChange={(evt) => setName(evt.target.value)} />
-        <button>Join</button>
-      </div>
-    </>
+      <HeroPanel onCreateRoom={createRoom} onJoinRoom={joinRoom} onRoomChange={changeRoom} onNameChange={changeName} name={name} roomId={roomId} />
   );
 }
-
-export default Home;

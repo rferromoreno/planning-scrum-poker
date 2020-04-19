@@ -1,5 +1,5 @@
 const HOME = '/';
-const ROOM = '/room/';
+const ROOM = '/room';
 
 export {
   HOME,
