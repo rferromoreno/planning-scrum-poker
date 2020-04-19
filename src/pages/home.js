@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { ROOM } from '../constants/routes';
+import HeroPanel from '../components/HeroPanel';
 
 const Home = () => {
   const history = useHistory();
@@ -15,6 +16,7 @@ const Home = () => {
 
   return (
     <>
+    <HeroPanel />
       <div>
         <h2>Create Room</h2>
         <button type="button" onClick={createRoom}>Create</button>
